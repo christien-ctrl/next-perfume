@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- bootstrap grid css -->
+    <link rel="stylesheet" href="css/plugins/bootstrap-grid.css">
+    <!-- font awesome css -->
+    <link rel="stylesheet" href="css/plugins/font-awesome.min.css">
+    <!-- swiper css -->
+    <link rel="stylesheet" href="css/plugins/swiper.min.css">
+    <!-- fancybox css -->
+    <link rel="stylesheet" href="css/plugins/fancybox.min.css">
+    <!-- ashley scss -->
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="icon" type="image/png" sizes="192x192"  href="img/logo-2.png">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<style>
+
+@media only screen and (max-width: 750px) {
+  .logo-white {
+    max-width: 150px !important;
+  }
+
+  .textsizeonphone {
+	font-size:20px !important;
+  }
+}
+@media only screen and (max-width: 1200px) {
+.logo-black {display:none !important;}
+.logo-white {display:block !important;}
+
+}
+
+a {text-decoration:none;}
+
+/* order page wireframe styles */
+.order-product-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 720px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+.order-product-info { padding-left: 0; }
+@media (min-width: 768px) {
+    .order-product-info { padding-left: 30px; }
+}
+.order-price {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #D4AF37;
+    margin: 0 0 30px 0;
+}
+.order-qty {
+    display: inline-flex;
+    align-items: stretch;
+    border: 1px solid #d0d0d0;
+    user-select: none;
+}
+.order-qty a {
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    line-height: 1;
+    font-size: 1.2rem;
+    transition: background 0.2s ease;
+}
+.order-qty a:hover { background: #f5f5f5; }
+.order-qty a.minus { border-right: 1px solid #d0d0d0; }
+.order-qty a.plus { border-left: 1px solid #d0d0d0; }
+.order-qty .val {
+    padding: 12px 24px;
+    line-height: 1;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    min-width: 50px;
+    justify-content: center;
+}
+.order-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.order-btn-secondary {
+    background: transparent !important;
+    border: 1px solid #D4AF37 !important;
+    color: #D4AF37 !important;
+}
+.order-btn-secondary:hover {
+    background: #D4AF37 !important;
+    color: #fff !important;
+}
+.order-trust-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    margin-top: 10px;
+}
+.order-trust-row span {
+    font-size: 0.85rem;
+    color: #666;
+    letter-spacing: 1px;
+}
+.order-divider-tagline {
+    font-size: 1.5rem;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 300;
+    margin: 0;
+}
+</style>
+
+<!-- <style> -->
+<!-- .mil-link.mil-dark svg {background: rgb(212, 175, 55);} -->
+<!-- </style> -->
+    <!-- page name -->
+    <title>CHRiSTiEN NEW — Order AURA</title>
+
+    <!-- skip preloader when arriving via Shop / ORDER NOW click -->
+    <script>
+        if (sessionStorage.getItem('skipPreloader') === '1') {
+            sessionStorage.removeItem('skipPreloader');
+            document.documentElement.classList.add('skip-preloader');
+        }
+    </script>
+    <style>
+        html.skip-preloader .mil-preloader { display: none !important; }
+        html.skip-preloader .mil-curtain { display: none !important; }
+        html.skip-preloader .mil-up { opacity: 1 !important; transform: none !important; }
+
+        /* order page: full-black header / hero, white logo, white hamburger */
+        body.order-page { background-color: #000; }
+        body.order-page .mil-content { background-color: #000; }
+        body.order-page .mil-dark-bg { background-color: #000; }
+        body.order-page .mil-dark-bg::before { display: none; }       /* disable invert trick */
+        body.order-page section.mil-p-120-90 { background-color: #fff; }   /* product section stays white */
+        body.order-page .mil-soft-bg { background-color: rgb(242, 242, 242); }  /* divider keeps its grey */
+        /* keep using logo.png (same image / same dimensions as index.html) and CSS-invert it to white */
+        body.order-page .logo-black { filter: invert(1); }
+        body.order-page .mil-menu-btn span,
+        body.order-page .mil-menu-btn span:after,
+        body.order-page .mil-menu-btn span:before { background: #fff !important; }
+
+        /* ---------- Payment method modal ---------- */
+        .payment-modal[hidden] { display: none; }
+        .payment-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: 'Outfit', sans-serif;
+            animation: pmFadeIn 0.18s ease-out;
+        }
+        @keyframes pmFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .payment-modal__backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+        }
+        .payment-modal__panel {
+            position: relative;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+            padding: 50px 50px 42px;
+            width: 100%;
+            max-width: 480px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            color: rgba(0, 0, 0, 0.85);
+            animation: pmRise 0.22s cubic-bezier(.2,.8,.2,1);
+        }
+        @keyframes pmRise { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @media (max-width: 600px) {
+            .payment-modal__panel {
+                padding: 44px 22px 26px;
+                max-width: 90vw;
+            }
+        }
+        .payment-modal__close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: transparent;
+            color: #888;
+            cursor: pointer;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s, color 0.15s;
+            padding: 0;
+        }
+        .payment-modal__close:hover { background: #f3f3f3; color: #000; }
+        .payment-modal__heading {
+            font-size: 1.55rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin: 0 0 8px;
+            color: #111;
+        }
+        .payment-modal__sub {
+            font-size: 0.88rem;
+            color: #999;
+            margin: 0 0 26px;
+            letter-spacing: 0.4px;
+            font-weight: 300;
+        }
+        .payment-modal__options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .payment-option {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background: #fff;
+            color: inherit;
+            font-family: inherit;
+            text-align: left;
+            width: 100%;
+            text-decoration: none;
+            transition: border-color 0.18s, background 0.15s, transform 0.1s, box-shadow 0.18s;
+        }
+        .payment-option--active { cursor: pointer; }
+        .payment-option--active:hover {
+            border-color: #D4AF37;
+            background: #fbf8ee;
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.15);
+        }
+        .payment-option--active:active { transform: translateY(1px); }
+        .payment-option--disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .payment-option__icon {
+            flex: 0 0 auto;
+            color: #333;
+            display: inline-flex;
+        }
+        .payment-option--active .payment-option__icon { color: #D4AF37; }
+        .payment-option__text {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+        .payment-option__label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #111;
+            letter-spacing: 0.3px;
+        }
+        .payment-option__sub {
+            font-size: 0.78rem;
+            color: #888;
+            letter-spacing: 0.3px;
+        }
+        .payment-option__chev {
+            flex: 0 0 auto;
+            color: #888;
+            display: inline-flex;
+            transition: transform 0.18s, color 0.18s;
+        }
+        .payment-option--active:hover .payment-option__chev {
+            transform: translateX(3px);
+            color: #D4AF37;
+        }
+        .payment-option__msg {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #b58e00;
+            letter-spacing: 0.3px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.2s, max-height 0.2s;
+        }
+        .payment-option--show-msg .payment-option__msg {
+            opacity: 1;
+            max-height: 30px;
+        }
+    </style>
+
+</head>
+
+<body class="order-page">
+
+    <!-- wrapper -->
+    <div class="mil-wrapper" id="top">
+
+        <!-- cursor -->
+        <div class="mil-ball">
+            <span class="mil-icon-1">
+                <svg viewBox="0 0 128 128">
+                    <path d="M106.1,41.9c-1.2-1.2-3.1-1.2-4.2,0c-1.2,1.2-1.2,3.1,0,4.2L116.8,61H11.2l14.9-14.9c1.2-1.2,1.2-3.1,0-4.2	c-1.2-1.2-3.1-1.2-4.2,0l-20,20c-1.2,1.2-1.2,3.1,0,4.2l20,20c0.6,0.6,1.4,0.9,2.1,0.9s1.5-0.3,2.1-0.9c1.2-1.2,1.2-3.1,0-4.2	L11.2,67h105.5l-14.9,14.9c-1.2,1.2-1.2,3.1,0,4.2c0.6,0.6,1.4,0.9,2.1,0.9s1.5-0.3,2.1-0.9l20-20c1.2-1.2,1.2-3.1,0-4.2L106.1,41.9	z" />
+                </svg>
+            </span>
+            <div class="mil-more-text">More</div>
+            <div class="mil-choose-text">Сhoose</div>
+        </div>
+        <!-- cursor end -->
+
+       <!-- preloader -->
+        <div class="mil-preloader">
+            <div class="mil-preloader-animation" >
+                <div class="mil-pos-abs mil-animation-1">
+					<p class="mil-h3 mil-muted mil-thin">Change</p>
+                    <p class="mil-h3 mil-muted mil-thin">Your</p>
+                    <p class="mil-h3 mil-muted">AURA</p>
+                </div>
+                <div class="mil-pos-abs mil-animation-2">
+                    <div class="mil-reveal-frame" >
+                        <p class="mil-reveal-box"></p>
+						<p class="mil-h3 mil-muted mil-thin">Change Your <b>LIFE</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- preloader end -->
+
+        <!-- scrollbar progress -->
+        <div class="mil-progress-track">
+            <div class="mil-progress"></div>
+        </div>
+        <!-- scrollbar progress end -->
+
+        <!-- menu -->
+        <div class="mil-menu-frame">
+            <!-- frame clone -->
+            <div class="mil-frame-top">
+                <a data-no-swup href="index.html" class="mil-logo">
+				<img src="img/logo-2.png" style="width: 200px;">
+				</a>
+                <div class="mil-menu-btn">
+                    <span></span>
+                </div>
+            </div>
+            <!-- frame clone end -->
+            <div class="container">
+                <div class="mil-menu-content">
+                    <div class="row">
+                        <div class="col-xl-5">
+
+                            <nav class="mil-main-menu" id="swupMenu">
+                                <ul>
+                                    <li class="mil-has-children">
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li class="mil-has-children">
+                                        <a href="index.html#.">Discover</a>
+                                    </li>
+                                    <li class="mil-has-children mil-active">
+                                        <a data-no-swup href="order.html" onclick="sessionStorage.setItem('skipPreloader','1')">Shop</a>
+                                    </li>
+                                    <li class="mil-has-children">
+                                        <a href="ChristienNew.html">About</a>
+                                    </li>
+                                    <li class="mil-has-children">
+                                        <a href="index.html#footer">Contact</a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                        <div class="col-xl-7" style="display:none;">
+
+                            <div class="mil-menu-right-frame">
+                                <div class="mil-animation-in">
+                                    <div class="mil-animation-frame">
+                                        <div class="mil-animation mil-position-1 mil-scale" data-value-1="2" data-value-2="2"></div>
+                                    </div>
+                                </div>
+                                <div class="mil-menu-right">
+                                    <div class="row">
+                                        <div class="col-lg-8 mil-mb-60">
+
+                                            <h6 class="mil-muted mil-mb-30">Projects</h6>
+
+                                            <ul class="mil-menu-list">
+                                                <li><a href="project-1.html" class="mil-light-soft">Interior design studio</a></li>
+                                                <li><a href="project-2.html" class="mil-light-soft">Home Security Camera</a></li>
+                                                <li><a href="project-3.html" class="mil-light-soft">Kemia Honest Skincare</a></li>
+                                                <li><a href="project-4.html" class="mil-light-soft">Cascade of Lava</a></li>
+                                                <li><a href="project-5.html" class="mil-light-soft">Air Pro by Molekule</a></li>
+                                                <li><a href="project-6.html" class="mil-light-soft">Tony's Chocolonely</a></li>
+                                            </ul>
+
+                                        </div>
+                                        <div class="col-lg-4 mil-mb-60">
+
+                                            <h6 class="mil-muted mil-mb-30">Useful links</h6>
+
+                                            <ul class="mil-menu-list">
+                                                <li><a href="index.html#." class="mil-light-soft">Privacy Policy</a></li>
+                                                <li><a href="index.html#." class="mil-light-soft">Terms and conditions</a></li>
+                                                <li><a href="index.html#." class="mil-light-soft">Cookie Policy</a></li>
+                                                <li><a href="index.html#." class="mil-light-soft">Careers</a></li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                    <div class="mil-divider mil-mb-60"></div>
+                                    <div class="row justify-content-between">
+
+                                        <div class="col-lg-4 mil-mb-60">
+
+                                            <h6 class="mil-muted mil-up mil-mb-30">France</h6>
+
+                                            <p class="mil-light-soft mil-up">68 Rue de Rivoli, Paris, 75004 France <span class="mil-no-wrap"></span></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- menu -->
+
+        <!-- curtain -->
+        <div class="mil-curtain"></div>
+        <!-- curtain end -->
+
+        <!-- frame -->
+        <div class="mil-frame">
+            <div class="mil-frame-top">
+                <a data-no-swup href="index.html" class="mil-logo"><img class="logo-black" src="img/logo.png" style="max-width:250px; display:block;"><img class="logo-white" src="img/logo-white.png" style="max-width:250px; display:none;"></a>
+                <div class="mil-menu-btn">
+                    <span></span>
+                </div>
+            </div>
+            <div class="mil-frame-bottom">
+                <div class="mil-current-page"></div>
+                <div class="mil-back-to-top">
+                    <a href="order.html#top" class="mil-link mil-dark mil-arrow-place" >
+                        <span>Back to top</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- frame end -->
+
+        <!-- content -->
+        <div class="mil-content">
+            <div id="swupMain" class="mil-main-transition">
+
+                <!-- hero -->
+                <section class="mil-dark-bg" style="padding: 180px 0 120px 0;">
+                    <div class="mi-invert-fix">
+                        <div class="container">
+                            <div class="mil-up" style="text-align: center;">
+                                <h1 class="mil-muted mil-mb-30" style="font-size: 3.5rem; line-height: 1.15;"><span class="mil-thin">AURA</span> — Signature Fragrance</h1>
+                                <p class="mil-light-soft" style="font-size: 1.25rem; letter-spacing: 2px; margin: 0;">Change your Aura. Change your Life.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- hero end -->
+
+                <!-- product display -->
+                <section class="mil-p-120-90">
+                    <div class="container">
+                        <div class="row align-items-center">
+
+                            <div class="col-md-6 mil-mb-60">
+                                <img class="mil-up order-product-img" src="img/Christien New Aura Black Edition Crop.png" alt="CHRiSTiEN NEW Aura Black Edition fragrance">
+                            </div>
+
+                            <div class="col-md-6 mil-mb-60">
+                                <div class="order-product-info">
+
+                                    <h2 class="mil-up mil-mb-15" style="font-size: 2.5rem;">AURA</h2>
+                                    <p class="mil-up mil-mb-30" style="font-size: 1.05rem; line-height: 1.8;">A fresh, luminous fragrance designed to crystallize your presence. Crisp top notes that linger like a memory, grounded by a soft aura that follows you into every room. 100ml Eau de Parfum.</p>
+                                    <p class="mil-up mil-mb-15" style="color: #999; font-size: 0.9rem;">Size: 100ml</p>
+                                    <h3 class="mil-up order-price">$380 USD</h3>
+
+                                    <!-- buttons -->
+                                    <div class="mil-up order-buttons">
+                                        <a data-no-swup href="#" onclick="openPaymentModal(); return false;" class="mil-button mil-arrow-place" aria-haspopup="dialog" aria-controls="paymentModal"><span>PURCHASE</span></a>
+                                    </div>
+
+                                    <!-- trust badges -->
+                                    <div class="mil-up order-trust-row">
+                                        <span>Authentic Guarantee</span>
+                                        <span>Secure Checkout</span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <!-- product display end -->
+
+                <!-- divider tagline -->
+                <div class="mil-soft-bg">
+                    <div class="container mil-p-0-120">
+                        <h4 class="mil-up order-divider-tagline"><span class="mil-thin">Change your</span> Aura. <span class="mil-thin">Change your</span> Life.</h4>
+                    </div>
+                </div>
+                <!-- divider tagline end -->
+
+                <!-- footer -->
+                <footer id="footer" class="mil-dark-bg">
+                    <div class="mi-invert-fix">
+                        <div class="container mil-p-120-60">
+                            <div class="row justify-content-between">
+                                <div class="col-md-4 col-lg-4 mil-mb-60">
+
+                                    <div class="mil-muted mil-logo mil-up mil-mb-30"><img src="img/logo-2.png" style="width:70%;"></div>
+
+                                    <p class="mil-light-soft mil-up mil-mb-30">Subscribe our newsletter:</p>
+
+                                    <form class="mil-subscribe-form mil-up">
+                                        <input type="text" placeholder="Enter our email">
+                                        <button type="submit" class="mil-button mil-icon-button-sm mil-arrow-place"></button>
+                                    </form>
+
+                                </div>
+                                <div class="col-md-7 col-lg-6">
+                                    <div class="row justify-content-end">
+                                        <div class="col-md-6 col-lg-7">
+
+                                            <nav class="mil-footer-menu mil-mb-60">
+                                                <ul>
+                                                    <li class="mil-up">
+                                                        <a href="index.html">Home</a>
+                                                    </li>
+                                                    <li class="mil-up">
+                                                        <a href="index.html#.">Discover</a>
+                                                    </li>
+													 <li class="mil-up mil-active">
+                                                        <a data-no-swup href="order.html" onclick="sessionStorage.setItem('skipPreloader','1')">Shop</a>
+                                                    </li>
+                                                    <li class="mil-up">
+                                                        <a href="ChristienNew.html">About</a>
+                                                    </li>
+                                                    <li class="mil-up">
+                                                        <a href="index.html#footer">Contact</a>
+                                                    </li>
+
+                                                </ul>
+                                            </nav>
+
+                                        </div>
+                                        <div class="col-md-6 col-lg-5">
+
+                                            <ul class="mil-menu-list mil-up mil-mb-60">
+                                                <li><a href="index.html#." class="mil-light-soft">Privacy Policy</a></li>
+                                                <li><a href="index.html#." class="mil-light-soft">Terms and conditions</a></li>
+                                                <li><a href="index.html#." class="mil-light-soft">Cookie Policy</a></li>
+                                                <li><a href="index.html#." class="mil-light-soft">Careers</a></li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-between flex-sm-row-reverse">
+                                <div class="col-md-7 col-lg-6">
+
+                                    <div class="row justify-content-between">
+
+                                        <div class="col-md-6 col-lg-5 mil-mb-60">
+
+                                            <h6 class="mil-muted mil-up mil-mb-30">France</h6>
+
+                                            <p class="mil-light-soft mil-up">68 Rue de Rivoli, Paris, 75004 France <span class="mil-no-wrap"></span></p>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4 col-lg-6 mil-mb-60">
+
+                                    <div class="mil-vert-between">
+                                        <div class="mil-mb-30">
+                                            <ul class="mil-social-icons mil-up">
+                                                <li><a href="index.html#." target="_blank" class="social-icon"> <i class="far fa-circle"></i></a></li>
+                                                <li><a href="index.html#." target="_blank" class="social-icon"> <i class="far fa-circle"></i></a></li>
+                                                <li><a href="index.html#." target="_blank" class="social-icon"> <i class="far fa-circle"></i></a></li>
+                                                <li><a href="index.html#." target="_blank" class="social-icon"> <i class="far fa-circle"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <p class="mil-light-soft mil-up">© Copyright 2024 - CHRISTIEN NEW Paris. All Rights Reserved.</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- footer end -->
+
+                <!-- hidden elements -->
+                <div class="mil-hidden-elements">
+                    <div class="mil-dodecahedron">
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="mil-pentagon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="mil-arrow">
+                        <path d="M 14 5.3417969 C 13.744125 5.3417969 13.487969 5.4412187 13.292969 5.6367188 L 13.207031 5.7226562 C 12.816031 6.1136563 12.816031 6.7467188 13.207031 7.1367188 L 17.070312 11 L 4 11 C 3.448 11 3 11.448 3 12 C 3 12.552 3.448 13 4 13 L 17.070312 13 L 13.207031 16.863281 C 12.816031 17.254281 12.816031 17.887344 13.207031 18.277344 L 13.292969 18.363281 C 13.683969 18.754281 14.317031 18.754281 14.707031 18.363281 L 20.363281 12.707031 C 20.754281 12.316031 20.754281 11.682969 20.363281 11.292969 L 14.707031 5.6367188 C 14.511531 5.4412187 14.255875 5.3417969 14 5.3417969 z" />
+                    </svg>
+
+                    <svg width="250" viewBox="0 0 300 1404" fill="none" xmlns="http://www.w3.org/2000/svg" class="mil-lines">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1 892L1 941H299V892C299 809.71 232.29 743 150 743C67.7096 743 1 809.71 1 892ZM0 942H300V892C300 809.157 232.843 742 150 742C67.1573 742 0 809.157 0 892L0 942Z" class="mil-move" />
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M299 146V97L1 97V146C1 228.29 67.7096 295 150 295C232.29 295 299 228.29 299 146ZM300 96L0 96V146C0 228.843 67.1573 296 150 296C232.843 296 300 228.843 300 146V96Z" class="mil-move" />
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M299 1H1V1403H299V1ZM0 0V1404H300V0H0Z" />
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M150 -4.37115e-08L150 1404L149 1404L149 0L150 -4.37115e-08Z" />
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M150 1324C232.29 1324 299 1257.29 299 1175C299 1092.71 232.29 1026 150 1026C67.7096 1026 1 1092.71 1 1175C1 1257.29 67.7096 1324 150 1324ZM150 1325C232.843 1325 300 1257.84 300 1175C300 1092.16 232.843 1025 150 1025C67.1573 1025 0 1092.16 0 1175C0 1257.84 67.1573 1325 150 1325Z" class="mil-move" />
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M300 1175H0V1174H300V1175Z" class="mil-move" />
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M150 678C232.29 678 299 611.29 299 529C299 446.71 232.29 380 150 380C67.7096 380 1 446.71 1 529C1 611.29 67.7096 678 150 678ZM150 679C232.843 679 300 611.843 300 529C300 446.157 232.843 379 150 379C67.1573 379 0 446.157 0 529C0 611.843 67.1573 679 150 679Z" class="mil-move" />
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M299 380H1V678H299V380ZM0 379V679H300V379H0Z" class="mil-move" />
+                    </svg>
+                </div>
+                <!-- hidden elements end -->
+
+            </div>
+        </div>
+        <!-- content -->
+    </div>
+    <!-- wrapper end -->
+
+    <!-- payment method modal -->
+    <div id="paymentModal" class="payment-modal" role="dialog" aria-modal="true" aria-labelledby="paymentModalTitle" hidden>
+        <div class="payment-modal__backdrop" onclick="closePaymentModal()"></div>
+        <div class="payment-modal__panel">
+            <button type="button" class="payment-modal__close" onclick="closePaymentModal()" aria-label="Close payment options">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                    <path d="M6 6 L18 18 M18 6 L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <h2 id="paymentModalTitle" class="payment-modal__heading">Choose payment method</h2>
+            <p class="payment-modal__sub">Select how you'd like to complete your purchase</p>
+            <div class="payment-modal__options">
+
+                <a class="payment-option payment-option--active"
+                   href="https://buy.stripe.com/eVqeVe2J27kH4ew2BO0ZW00"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-no-swup
+                   onclick="setTimeout(closePaymentModal, 150)">
+                    <span class="payment-option__icon" aria-hidden="true">
+                        <svg viewBox="0 0 32 22" width="32" height="22">
+                            <rect x="0.75" y="0.75" width="30.5" height="20.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <rect x="2.25" y="5" width="27.5" height="3.5" fill="currentColor"/>
+                            <rect x="4" y="13" width="7" height="2" rx="1" fill="currentColor"/>
+                        </svg>
+                    </span>
+                    <span class="payment-option__text">
+                        <span class="payment-option__label">Credit / Debit Card</span>
+                        <span class="payment-option__sub">Secure checkout via Stripe</span>
+                    </span>
+                    <span class="payment-option__chev" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="16" height="16">
+                            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <div class="payment-option payment-option--disabled" aria-disabled="true" onclick="this.classList.add('payment-option--show-msg')">
+                    <span class="payment-option__icon" aria-hidden="true">
+                        <svg viewBox="0 0 32 22" width="32" height="22">
+                            <path d="M3 5h22a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="22" cy="13" r="2" fill="currentColor"/>
+                        </svg>
+                    </span>
+                    <span class="payment-option__text">
+                        <span class="payment-option__label">PayPal</span>
+                        <span class="payment-option__sub">Coming soon</span>
+                        <span class="payment-option__msg">PayPal will be available shortly.</span>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            var modal = document.getElementById('paymentModal');
+            if (!modal) return;
+            var prevOverflow = '';
+            window.openPaymentModal = function () {
+                modal.removeAttribute('hidden');
+                prevOverflow = document.body.style.overflow;
+                document.body.style.overflow = 'hidden';
+            };
+            window.closePaymentModal = function () {
+                modal.setAttribute('hidden', '');
+                document.body.style.overflow = prevOverflow;
+                var shown = modal.querySelector('.payment-option--show-msg');
+                if (shown) shown.classList.remove('payment-option--show-msg');
+            };
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !modal.hasAttribute('hidden')) {
+                    window.closePaymentModal();
+                }
+            });
+        })();
+    </script>
+
+    <!-- jQuery js -->
+    <script src="js/plugins/jquery.min.js"></script>
+    <!-- swup js -->
+    <script src="js/plugins/swup.min.js"></script>
+    <!-- swiper js -->
+    <script src="js/plugins/swiper.min.js"></script>
+    <!-- fancybox js -->
+    <script src="js/plugins/fancybox.min.js"></script>
+    <!-- gsap js -->
+    <script src="js/plugins/gsap.min.js"></script>
+    <!-- scroll smoother -->
+    <script src="js/plugins/smooth-scroll.js"></script>
+    <!-- scroll trigger js -->
+    <script src="js/plugins/ScrollTrigger.min.js"></script>
+    <!-- scroll to js -->
+    <script src="js/plugins/ScrollTo.min.js"></script>
+    <!-- ashley js -->
+    <script src="js/main.js"></script>
+	 <script src="https://ashleytest.appsquest.net/ashley/js/animation.js"></script>
+
+</body>
+
+</html>

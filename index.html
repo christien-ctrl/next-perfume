@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="css/plugins/fancybox.min.css">
     <!-- ashley scss -->
     <link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="https://ashleytest.appsquest.net/ashley/css/animation.css">
 	<link rel="icon" type="image/png" sizes="192x192"  href="img/logo-2.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -131,7 +130,7 @@ a {text-decoration:none;}
                                         <!-- </ul> -->
                                     </li>
                                     <li class="mil-has-children">
-                                        <a href="http://christiennew.shop/">Shop</a>
+                                        <a data-no-swup href="order.html" onclick="sessionStorage.setItem('skipPreloader','1')">Shop</a>
                                         <!-- <ul> -->
                                             <!-- <li><a href="services.html">Services List</a></li> -->
                                             <!-- <li><a href="service.html">Single service</a></li> -->
@@ -308,7 +307,7 @@ a {text-decoration:none;}
                                             </text>
                                         </g>
                                     </svg>
-                                    <a href="http://christiennew.shop/" class="mil-button mil-arrow-place mil-icon-button mil-arrow-down"></a>
+                                    <a data-no-swup href="order.html" onclick="sessionStorage.setItem('skipPreloader','1')" class="mil-button mil-arrow-place mil-icon-button mil-arrow-down"></a>
                                 </div>
 
                             </div>
@@ -344,7 +343,7 @@ a {text-decoration:none;}
                                 <div class="mil-about-photo mil-mb-90">
                                     <div class="mil-lines-place"></div>
                                     <div class="mil-up mil-img-frame" style="padding-bottom: 160%;">
-                                        <img src="img/photo/1.jpg" alt="img" class="mil-scale" data-value-1="1" data-value-2="1.2">
+                                        <img src="img/per 1.jpg" alt="CHRiSTiEN NEW Aura" class="mil-scale" data-value-1="1" data-value-2="1.2">
                                     </div>
                                 </div>
 
@@ -374,7 +373,7 @@ a {text-decoration:none;}
 
                                 <div class="mil-complex-text justify-content-center mil-up mil-mb-15">
 
-                                    <span class="mil-text-image col-lg-4 col-sm-12" style="height:300px; max-height:300px;"><img src="img/photo/2.jpg" style="height:300px; max-height:300px;" alt="team"></span>
+                                    <span class="mil-text-image col-lg-4 col-sm-12" style="height:300px; max-height:300px;"><video autoplay loop muted playsinline preload="auto" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"><source src="img/golden-glitter.mp4" type="video/mp4"></video></span>
                                     <div class="col-lg-8 col-sm-10">
 										<!-- <h2 class="mil-thin mil-muted mil-left textsizeonphone" style="font-size:30px;">Christien New’s Aura perfumes are <span style="font-weight:bold;">designed to influence and enhance our aura</span>, which in turn can <span style="font-weight:bold;">impact various aspects of our lives.</span> Here's how an aura perfume can potentially change someone's life:</h2> -->
 										<p class="mil-up mil-mb-30" style="font-size:25px; color:white; font-family: Outfit, sans-serif; line-height:2;">Christien New’s Aura perfumes are <span style="font-weight:bold;">designed to influence and enhance our aura</span>, which in turn can <span style="font-weight:bold;">impact various aspects of our lives.</span> Here's how an aura perfume can potentially change someone's life:</p>
@@ -447,7 +446,7 @@ a {text-decoration:none;}
                                 <div class="mil-about-photo mil-mb-90">
                                     <div class="mil-lines-place"></div>
                                     <div class="mil-up mil-img-frame" style="padding-bottom: 160%;">
-                                        <img src="img/photo/1.jpg" alt="img" class="mil-scale" data-value-1="1" data-value-2="1.2">
+                                        <img src="img/per 2.jpeg" alt="CHRiSTiEN NEW Aspiration" class="mil-scale" data-value-1="1" data-value-2="1.2">
                                     </div>
                                 </div>
 
@@ -873,7 +872,13 @@ a {text-decoration:none;}
                 </div>
                 <!-- partners end -->
 
-                
+                <!-- order cta -->
+                <section class="mil-p-120-90" style="text-align: center;">
+                    <div class="container">
+                        <a data-no-swup href="order.html" onclick="sessionStorage.setItem('skipPreloader','1')" class="mil-button mil-arrow-place mil-up" style="display: inline-flex;"><span>ORDER NOW</span></a>
+                    </div>
+                </section>
+                <!-- order cta end -->
 
                 <!-- footer -->
                 <footer id="footer" class="mil-dark-bg">
@@ -905,7 +910,7 @@ a {text-decoration:none;}
                                                         <a href="index.html#.">Discover</a>
                                                     </li>
 													 <li class="mil-up">
-                                                        <a href="http://christiennew.shop/">Shop</a>
+                                                        <a data-no-swup href="order.html" onclick="sessionStorage.setItem('skipPreloader','1')">Shop</a>
                                                     </li>
                                                     <li class="mil-up">
                                                         <a href="ChristienNew.html">About</a>
