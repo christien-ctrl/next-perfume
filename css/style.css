@@ -4228,3 +4228,20 @@ html.is-animating .mil-menu-frame {
   -webkit-transition-delay: 0.3s;
           transition-delay: 0.3s;
 }
+
+/* Lock the top-left logo frame to the viewport on every page so it
+   does not scroll away with the content. Combined with the JS that
+   moves .mil-frame to be a direct child of <body>, this guarantees
+   it stays fixed regardless of any parent's transform/overflow. */
+body > .mil-frame {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  -webkit-transform: none !important;
+          transform: none !important;
+}
+html.is-animating body > .mil-frame {
+  -webkit-transform: none !important;
+          transform: none !important;
+}

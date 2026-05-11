@@ -22,6 +22,19 @@
     <!-- page name -->
     <title>CHRiSTiEN NEW</title>
 
+    <!-- skip preloader when arriving via internal click -->
+    <script>
+        if (sessionStorage.getItem('skipPreloader') === '1') {
+            sessionStorage.removeItem('skipPreloader');
+            document.documentElement.classList.add('skip-preloader');
+        }
+    </script>
+    <style>
+        html.skip-preloader .mil-preloader { display: none !important; }
+        html.skip-preloader .mil-curtain { display: none !important; }
+        html.skip-preloader .mil-up { opacity: 1 !important; transform: none !important; }
+    </style>
+
 </head>
 	<style>
 	
@@ -121,7 +134,7 @@ a {text-decoration:none;}
                                         <!-- </ul> -->
                                     </li>
                                     <li class="mil-has-children">
-                                        <a href="oursolution.html#.">Discover</a>
+                                        <a href="discoverus.html" data-no-swup onclick="event.preventDefault(); sessionStorage.setItem('skipPreloader','1'); window.location.href='discoverus.html';">Discover</a>
                                         <!-- <ul> -->
                                             <!-- <li><a href="portfolio-1.html">Grid type 1</a></li> -->
                                             <!-- <li><a href="portfolio-2.html">Grid type 2</a></li> -->
@@ -259,11 +272,8 @@ a {text-decoration:none;}
                                         <li><a href="index.html">Homepage</a></li>
                                         <li><a href="oursolution.html">Our Solution</a></li>
                                     </ul>
-                                   
-									<img src="img/Picture1.png" style="width:100%;">
-									<img src="img/Picture2.png" style="width:100%; padding-top:20px;">
-									
-									<h1 class="mil-muted mil-mb-60 textsizeonphone" style="font-size:30px; padding-top:50px; margin-bottom:10px;">Our Solution</h1>
+
+									<h1 class="mil-muted mil-mb-60 textsizeonphone" style="font-size:30px; margin-bottom:10px;">Our Solution</h1>
 									<h1 class="mil-muted mil-mb-60 textsizeonphonesmaller" style="font-size:20px;">"Now, let's talk about solutions. </h1>
 									<p class="mil-descr mil-light-soft mil-up mil-mb-30"><span style="font-weight:bold;">"Our personalized </span>Christien New’s Aura Enhancement Perfume is <span style="font-weight:bold;">meticulously crafted according to your unique Numerology and Astrology profile.</span> It effectively cleanses negative energies from your aura, restoring it back to a positive and vibrant state that exudes an irresistible attraction. </p>
 									
@@ -409,7 +419,7 @@ a {text-decoration:none;}
                                                         <a href="index.html">Home</a>
                                                     </li>
                                                     <li class="mil-up">
-                                                        <a href="oursolution.html#.">Discover</a>
+                                                        <a href="discoverus.html" data-no-swup onclick="event.preventDefault(); sessionStorage.setItem('skipPreloader','1'); window.location.href='discoverus.html';">Discover</a>
                                                     </li>
 													 <li class="mil-up">
                                                         <a data-no-swup href="order.html" onclick="sessionStorage.setItem('skipPreloader','1')">Shop</a>

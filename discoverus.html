@@ -22,6 +22,19 @@
     <!-- page name -->
     <title>CHRiSTiEN NEW</title>
 
+    <!-- skip preloader when arriving via internal click -->
+    <script>
+        if (sessionStorage.getItem('skipPreloader') === '1') {
+            sessionStorage.removeItem('skipPreloader');
+            document.documentElement.classList.add('skip-preloader');
+        }
+    </script>
+    <style>
+        html.skip-preloader .mil-preloader { display: none !important; }
+        html.skip-preloader .mil-curtain { display: none !important; }
+        html.skip-preloader .mil-up { opacity: 1 !important; transform: none !important; }
+    </style>
+
 </head>
 	<style>
 	
@@ -117,7 +130,7 @@ a {text-decoration:none;}
                                         <!-- </ul> -->
                                     </li>
                                     <li class="mil-has-children">
-                                        <a href="discoverus.html#.">Discover</a>
+                                        <a href="discoverus.html" data-no-swup onclick="event.preventDefault(); sessionStorage.setItem('skipPreloader','1'); window.location.href='discoverus.html';">Discover</a>
                                         <!-- <ul> -->
                                             <!-- <li><a href="portfolio-1.html">Grid type 1</a></li> -->
                                             <!-- <li><a href="portfolio-2.html">Grid type 2</a></li> -->
@@ -406,7 +419,7 @@ a {text-decoration:none;}
                                                         <a href="index.html">Home</a>
                                                     </li>
                                                     <li class="mil-up">
-                                                        <a href="discoverus.html#.">Discover</a>
+                                                        <a href="discoverus.html" data-no-swup onclick="event.preventDefault(); sessionStorage.setItem('skipPreloader','1'); window.location.href='discoverus.html';">Discover</a>
                                                     </li>
 													 <li class="mil-up">
                                                         <a data-no-swup href="order.html" onclick="sessionStorage.setItem('skipPreloader','1')">Shop</a>
