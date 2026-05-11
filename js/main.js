@@ -39,8 +39,26 @@ $(function () {
     ***************************/
     (function lockLogoFrame() {
         var frame = document.querySelector('.mil-frame');
-        if (frame && frame.parentNode !== document.body) {
-            document.body.appendChild(frame);
+        if (frame) {
+            if (frame.parentNode !== document.body) {
+                document.body.appendChild(frame);
+            }
+            // Set inline styles with !important so they beat any
+            // cached stylesheet, theme override, or page-transition
+            // transform that would otherwise let the frame scroll
+            // with the page content.
+            var lockProps = {
+                position: 'fixed',
+                top: '0',
+                left: '0',
+                right: '0',
+                width: '100%',
+                transform: 'none',
+                '-webkit-transform': 'none'
+            };
+            Object.keys(lockProps).forEach(function (k) {
+                frame.style.setProperty(k, lockProps[k], 'important');
+            });
         }
         var logoLink = document.querySelector('.mil-frame .mil-logo');
         if (logoLink) {
