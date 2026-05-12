@@ -28,50 +28,6 @@ $(function () {
 
     /***************************
 
-    fixed top-left logo frame
-
-    Hoist .mil-frame out of .mil-wrapper so it's a direct child of
-    <body>. This guarantees position:fixed stays anchored to the
-    viewport regardless of any ancestor transform/overflow. Also
-    forces the logo link to bypass swup so clicking it returns to
-    home instantly (no curtain fade, no preloader).
-
-    ***************************/
-    (function lockLogoFrame() {
-        var frame = document.querySelector('.mil-frame');
-        if (frame) {
-            if (frame.parentNode !== document.body) {
-                document.body.appendChild(frame);
-            }
-            // Set inline styles with !important so they beat any
-            // cached stylesheet, theme override, or page-transition
-            // transform that would otherwise let the frame scroll
-            // with the page content.
-            var lockProps = {
-                position: 'fixed',
-                top: '0',
-                left: '0',
-                right: '0',
-                width: '100%',
-                transform: 'none',
-                '-webkit-transform': 'none'
-            };
-            Object.keys(lockProps).forEach(function (k) {
-                frame.style.setProperty(k, lockProps[k], 'important');
-            });
-        }
-        var logoLink = document.querySelector('.mil-frame .mil-logo');
-        if (logoLink) {
-            logoLink.setAttribute('data-no-swup', '');
-            logoLink.setAttribute('href', 'index.html');
-            logoLink.addEventListener('click', function () {
-                sessionStorage.setItem('skipPreloader', '1');
-            });
-        }
-    })();
-
-    /***************************
-
     register gsap plugins
 
     ***************************/

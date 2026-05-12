@@ -4229,29 +4229,10 @@ html.is-animating .mil-menu-frame {
           transition-delay: 0.3s;
 }
 
-/* Lock the top-left logo frame to the viewport on every page so it
-   does not scroll away with the content. Combined with the JS that
-   moves .mil-frame to be a direct child of <body>, this guarantees
-   it stays fixed regardless of any parent's transform/overflow. */
-.mil-frame,
-body > .mil-frame {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
-  -webkit-transform: none !important;
-          transform: none !important;
-}
-html.is-animating .mil-frame,
-html.is-animating body > .mil-frame {
-  -webkit-transform: none !important;
-          transform: none !important;
+/* Hide persistent corner logo (keep menu button and back-to-top functional) */
+.mil-frame .mil-logo {
+    display: none !important;
 }
 
-/* Force the white "CHRiSTiEN NEW PARIS" logo on every page and every
-   screen size. The per-page <style> blocks only swapped to white below
-   1200px; this overrides them so white is used always, including
-   desktop and over dark hero backgrounds. */
-.mil-frame .logo-black { display: none !important; }
-.mil-frame .logo-white { display: block !important; }
+/* Push menu button back to the right when logo is hidden */
+.mil-frame-top { justify-content: flex-end !important; }
