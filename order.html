@@ -775,6 +775,30 @@ a {text-decoration:none;}
                     </span>
                 </a>
 
+                <a class="payment-option payment-option--active"
+                   href="https://buy.stripe.com/3cIfZi6Zi6gDeTa1xK0ZW02"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-no-swup
+                   onclick="setTimeout(closePaymentModal, 150)">
+                    <span class="payment-option__icon" aria-hidden="true">
+                        <svg viewBox="0 0 32 22" width="32" height="22">
+                            <rect x="0.75" y="0.75" width="30.5" height="20.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <rect x="2.25" y="5" width="27.5" height="3.5" fill="currentColor"/>
+                            <rect x="4" y="13" width="7" height="2" rx="1" fill="currentColor"/>
+                        </svg>
+                    </span>
+                    <span class="payment-option__text">
+                        <span class="payment-option__label">Credit / Debit Card — Malaysia</span>
+                        <span class="payment-option__sub">Secure checkout via Stripe (MYR)</span>
+                    </span>
+                    <span class="payment-option__chev" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="16" height="16">
+                            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </a>
+
                 <div class="payment-option payment-option--disabled" aria-disabled="true" onclick="this.classList.add('payment-option--show-msg')">
                     <span class="payment-option__icon" aria-hidden="true">
                         <svg viewBox="0 0 32 22" width="32" height="22">
