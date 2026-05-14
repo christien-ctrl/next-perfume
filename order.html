@@ -775,8 +775,11 @@ a {text-decoration:none;}
                     </span>
                 </a>
 
+                <!-- ⚠️ TEMP: This link was swapped to test mode for development.
+                     Before launching publicly, swap back to live URL:
+                     https://buy.stripe.com/3cIfZi6Zi6gDeTa1xK0ZW02 -->
                 <a class="payment-option payment-option--active"
-                   href="https://buy.stripe.com/3cIfZi6Zi6gDeTa1xK0ZW02"
+                   href="https://buy.stripe.com/test_28EeVefvOdJ54ewekw0ZW01"
                    target="_blank"
                    rel="noopener noreferrer"
                    data-no-swup
@@ -859,6 +862,30 @@ a {text-decoration:none;}
     <!-- ashley js -->
     <script src="js/main.js"></script>
 	 <script src="https://ashleytest.appsquest.net/ashley/js/animation.js"></script>
+
+    <!-- affiliate attribution: append client_reference_id to Stripe links -->
+    <script>
+        (function () {
+            try {
+                var match = document.cookie.match(/(?:^|;\s*)ref_aff_id=([^;]+)/);
+                var cookieValue = match ? decodeURIComponent(match[1]) : '';
+                var count = 0;
+                if (cookieValue) {
+                    var links = document.querySelectorAll('a[href^="https://buy.stripe.com/"]');
+                    for (var i = 0; i < links.length; i++) {
+                        var a = links[i];
+                        var url = new URL(a.href);
+                        url.searchParams.set('client_reference_id', cookieValue);
+                        a.href = url.toString();
+                        count++;
+                    }
+                }
+                console.log('[AFFILIATE] cookie value:', cookieValue || 'none', '— modified', count, 'Stripe links');
+            } catch (err) {
+                console.error('[AFFILIATE]', err);
+            }
+        })();
+    </script>
 
 </body>
 
